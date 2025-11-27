@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" fx:id="logInForm" prefHeight="179.0" prefWidth="313.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25">
+   <children>
+      <Label fx:id="usernameLbl" layoutX="14.0" layoutY="14.0" prefHeight="39.0" prefWidth="88.0" text="Username:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="passwordLbl" layoutX="14.0" layoutY="71.0" prefHeight="39.0" prefWidth="88.0" text="Password:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameTxtField" layoutX="133.0" layoutY="21.0" prefHeight="25.0" prefWidth="170.0" promptText="Username" />
+      <PasswordField fx:id="passwordField" layoutX="133.0" layoutY="78.0" prefHeight="25.0" prefWidth="170.0" promptText="Password" />
+      <Button fx:id="guestLogInBtn" layoutX="7.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Guest Log In" />
+      <Button fx:id="createUserBtn" layoutX="102.0" layoutY="140.0" mnemonicParsing="false" text="Create User" />
+      <Button fx:id="logInBtn" layoutX="253.0" layoutY="140.0" mnemonicParsing="false" text="Log In" />
+   </children>
+</AnchorPane>
