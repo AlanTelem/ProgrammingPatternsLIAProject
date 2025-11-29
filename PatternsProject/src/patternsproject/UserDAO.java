@@ -14,6 +14,9 @@ import java.util.Optional;
 public interface UserDAO {
     Optional<User> getUserById(int id);
     List<User> getAllUsers();
+    String getUserByUsername(String username);
+    String getPasswordByUsername(String username);
+    boolean userExists(String username);
     void registerUser(User user);
     void updateUser(User user);
     void deleteUser(int id);

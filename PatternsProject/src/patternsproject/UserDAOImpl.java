@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO{
     }
     @Override
     public Optional<User> getUserById(int id) {
-        String sql = "SELECT * FROM users WHERE id = ?";
+        String sql = "SELECT * FROM users WHERE userId = ?";
         try(Connection conn = DriverManager.getConnection(dbUrl);
                 PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1, id);
@@ -53,13 +53,62 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void registerUser(User user) {
-        String sql = "INSERT INTO users VALUES(?,?,?)";
+    public String getUserByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE userName = ?";
+        String result = null;
         try(Connection conn = DriverManager.getConnection(dbUrl);
                 PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setInt(1, user.getUserId());
-            pstmt.setString(2, user.getUserName());
-            pstmt.setString(3, user.getEncryptedPassword());
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next())
+                result = rs.getString("userName");
+        } catch (SQLException sqle){
+            System.err.println(sqle.getMessage());
+        }
+        return result;
+    }
+    
+    @Override
+    public String getPasswordByUsername(String username) {
+        String sql = "SELECT passwordEncrypted FROM users WHERE userName = ?";
+        String result = null;
+        try(Connection conn = DriverManager.getConnection(dbUrl);
+                PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next())
+                result = rs.getString("passwordEncrypted");
+        } catch (SQLException sqle){
+            System.err.println(sqle.getMessage());
+        }
+        return result;
+    }
+    
+        @Override
+    public boolean userExists(String username) {
+        String sql = "SELECT * FROM users WHERE userName = ?";
+        boolean result = false;
+        try(Connection conn = DriverManager.getConnection(dbUrl);
+                PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next())
+                result = true;
+        } catch (SQLException sqle){
+            System.err.println(sqle.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public void registerUser(User user) {
+        String sql = "INSERT INTO Users (userName, passwordEncrypted) VALUES(?,?)";
+        try(Connection conn = DriverManager.getConnection(dbUrl);
+                PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, user.getUserName());
+            pstmt.setString(2, user.getEncryptedPassword());
+            
+            pstmt.executeUpdate();
         } catch (SQLException sqle){
             System.err.println(sqle.getMessage());
         }
