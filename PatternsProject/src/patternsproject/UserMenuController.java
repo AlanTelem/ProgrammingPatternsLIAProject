@@ -6,7 +6,11 @@ package patternsproject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +20,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.MapValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -36,9 +42,15 @@ public class UserMenuController implements Initializable {
     @FXML
     private Button logOutBtn;
     @FXML
-    private ListView<?> quickViewListView;
+    private TableView<Map<String, Object>> quickViewTableView;
+    @FXML
+    private TableColumn<Map, String> friendCol;
+    @FXML
+    private TableColumn<Map, String> collectionCol;
 
-    private UserDAO userSQL;
+    private FriendshipDAOImpl friendDAO;
+    
+    private ObservableList<Map<String, Object>> collectionList = FXCollections.observableArrayList();
     
     private Stage stage;
     private Scene scene;
@@ -48,8 +60,21 @@ public class UserMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        friendCol.setCellValueFactory(new MapValueFactory<>("userKey"));
+        collectionCol.setCellValueFactory(new MapValueFactory<>("collectionKey"));
+        
+        loadTableData();
+    }
+    
+    private void loadTableData(){
+        collectionList.clear(); //Ensures no duplicates at any point
+        
+        List<Map<String, Object>> data = friendDAO.getFriendsCollections(UserSession.getInstance().getUserId());
+        
+        collectionList.addAll(data);
+        
+        quickViewTableView.setItems(collectionList);
+    }
     
     public void switchWelcomeText(String text){
         String defaultText = welcomeLbl.getText();
@@ -59,6 +84,7 @@ public class UserMenuController implements Initializable {
         welcomeLbl.setText(newText);
     }
     
+    @FXML
     public void switchToCollectionsMenu(ActionEvent event){
        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
@@ -76,7 +102,10 @@ public class UserMenuController implements Initializable {
         parentStage.close();
     }
     
+    @FXML
     public void logOut(ActionEvent event){
+        UserSession.logOutInstance();
+        
         Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInMenu.FXML"));

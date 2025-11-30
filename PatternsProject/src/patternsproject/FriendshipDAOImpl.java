@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -67,4 +69,37 @@ public class FriendshipDAOImpl implements FriendshipDAO{
         }
         return friends;
     }    
+    
+    @Override
+    public List<Map<String, Object>> getFriendsCollections(int userId){
+        List<Map<String, Object>> dataList = new ArrayList<>();
+        
+        String sql = "SELECT u.userName, col.collectionTitle "
+                + "FROM u.Users "
+                + "JOIN f.Friendships ON u.userId = f.friendId "
+                + "JOIN ct.CollectionTracker ON u.userId = ct.userId "
+                + "JOIN col.Collection ON ct.collectionId = col.collectionId "
+                + "WHERE f.userId = ?";
+        
+        try (Connection conn = DriverManager.getConnection(dbUrl);
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+                pstmt.setInt(1, userId);
+                try (ResultSet rs = pstmt.executeQuery(sql)){
+                    while (rs.next()) {
+                        Map<String, Object> row = new HashMap<>();
+
+                        String friendName = rs.getString("userName");
+                        String collection = rs.getString("collectionTitle");
+
+                        row.put("userKey", friendName);
+                        row.put("collectionKey", collection);
+
+                        dataList.add(row);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+        }
+        return dataList;
+    }
 }

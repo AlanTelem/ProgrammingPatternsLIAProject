@@ -84,6 +84,22 @@ public class UserDAOImpl implements UserDAO{
         return result;
     }
     
+    @Override
+    public int getIdByUser(String username) {
+        String sql = "SELECT userId FROM users WHERE userName = ?";
+        int result = 0;
+        try(Connection conn = DriverManager.getConnection(dbUrl);
+                PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next())
+                result = rs.getInt("userId");
+        } catch (SQLException sqle){
+            System.err.println(sqle.getMessage());
+        }
+        return result;
+    }
+    
         @Override
     public boolean userExists(String username) {
         String sql = "SELECT * FROM users WHERE userName = ?";

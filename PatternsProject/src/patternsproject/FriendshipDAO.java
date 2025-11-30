@@ -4,6 +4,9 @@
  */
 package patternsproject;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author highv
@@ -12,4 +15,5 @@ public interface FriendshipDAO {
     void createFriendship(Friendship friend);
     void deleteFriendship(int id);
     java.util.List<User> getFriends(int userId);
+    List<Map<String, Object>> getFriendsCollections(int userId);
 }

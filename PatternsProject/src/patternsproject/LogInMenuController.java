@@ -62,7 +62,16 @@ public class LogInMenuController implements Initializable {
     
     public void authenticate(ActionEvent event){
         String password = passwordField.getText() + "encrypted";
-        if (usernameTxtField.getText().equals(userDAO.getUserByUsername(usernameTxtField.getText())) && password.equals(userDAO.getPasswordByUsername(usernameTxtField.getText()))){
+        if (usernameTxtField.getText().equalsIgnoreCase("Guest")){
+            Alert guestAlert = new Alert(Alert.AlertType.ERROR);
+            guestAlert.setTitle("Guest Conflict");
+            guestAlert.setHeaderText("Invalid Username");
+            guestAlert.setContentText("You cannot log in with the guest username. To log in as a guest, press the \"Guest Log In\" button.");
+            guestAlert.showAndWait();
+        } else if (usernameTxtField.getText().equals(userDAO.getUserByUsername(usernameTxtField.getText())) && password.equals(userDAO.getPasswordByUsername(usernameTxtField.getText()))){
+            
+            UserSession.setInstance(userDAO.getIdByUser(usernameTxtField.getText()));
+            
             Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.FXML"));
@@ -92,7 +101,13 @@ public class LogInMenuController implements Initializable {
     }
     
     public void createUser(ActionEvent event){
-        if (userDAO.userExists(usernameTxtField.getText())){
+        if (usernameTxtField.getText().equalsIgnoreCase("Guest")){
+            Alert guestAlert = new Alert(Alert.AlertType.ERROR);
+            guestAlert.setTitle("Creation Conflict");
+            guestAlert.setHeaderText("Invalid Username");
+            guestAlert.setContentText("You cannot create an account with the guest username. Please create an account with a unique username");
+            guestAlert.showAndWait();
+        } else if (userDAO.userExists(usernameTxtField.getText())){
             Alert creationAlert = new Alert(Alert.AlertType.ERROR);
             creationAlert.setTitle("Creation Error");
             creationAlert.setHeaderText("User Already Exists");
