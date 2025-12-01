@@ -75,16 +75,16 @@ public class FriendshipDAOImpl implements FriendshipDAO{
         List<Map<String, Object>> dataList = new ArrayList<>();
         
         String sql = "SELECT u.userName, col.collectionTitle "
-                + "FROM u.Users "
-                + "JOIN f.Friendships ON u.userId = f.friendId "
-                + "JOIN ct.CollectionTracker ON u.userId = ct.userId "
-                + "JOIN col.Collection ON ct.collectionId = col.collectionId "
+                + "FROM Users u "
+                + "JOIN Friendships f ON u.userId = f.friendId "
+                + "JOIN CollectionTracker ct ON u.userId = ct.userId "
+                + "JOIN Collection col ON ct.collectionId = col.collectionId "
                 + "WHERE f.userId = ?";
         
         try (Connection conn = DriverManager.getConnection(dbUrl);
-            PreparedStatement pstmt = conn.prepareStatement(sql)){
-                pstmt.setInt(1, userId);
-                try (ResultSet rs = pstmt.executeQuery(sql)){
+                PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, userId);
+                try (ResultSet rs = pstmt.executeQuery()){
                     while (rs.next()) {
                         Map<String, Object> row = new HashMap<>();
 
@@ -101,5 +101,29 @@ public class FriendshipDAOImpl implements FriendshipDAO{
                 e.printStackTrace();
         }
         return dataList;
+    }
+
+    @Override
+    public List<String> getFriendsName(int userId) {
+        List<String> names = new ArrayList<>();
+        String sql = "SELECT u.userName "
+                + "FROM Users u "
+                + "JOIN Friendships f ON f.userId=u.userId "
+                + "WHERE f.friendId = ?";
+        try (Connection conn = DriverManager.getConnection(dbUrl);
+                PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while(rs.next()){
+                    names.add(rs.getString("userName"));
+                }
+            } catch (SQLException sqle){
+                System.err.println(sqle.getMessage());
+                
+            }
+        } catch (SQLException sqle){
+            System.err.println(sqle.getMessage());
+        }
+        return names;
     }
 }

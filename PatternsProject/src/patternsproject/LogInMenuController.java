@@ -74,10 +74,10 @@ public class LogInMenuController implements Initializable {
             
             Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.FXML"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/patternsproject/UserMenu.fxml"));
             try{ root = loader.load();}
             catch (IOException ioe){
-                System.err.println(ioe.getMessage());
+                ioe.printStackTrace();
             }
 
             UserMenuController controller = loader.getController();
@@ -114,7 +114,7 @@ public class LogInMenuController implements Initializable {
             creationAlert.setContentText("The username you used already exists");
             creationAlert.showAndWait();
         } else {
-            User newUser = new User(usernameTxtField.getText(), (passwordField.getText() + "encrypted"));
+            User newUser = new User(usernameTxtField.getText(), (passwordField.getText()));
             userDAO.registerUser(newUser);
             Alert created = new Alert(Alert.AlertType.CONFIRMATION);
             created.setTitle("User Created");
@@ -125,12 +125,14 @@ public class LogInMenuController implements Initializable {
     }
     
     public void switchToGuestUserMenu(ActionEvent event){
+        UserSession.setInstance(userDAO.getIdByUser(usernameTxtField.getText()));
+        
         Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.FXML"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
         try{ root = loader.load();}
         catch (IOException ioe){
-            System.err.println(ioe.getMessage());
+            ioe.printStackTrace();
         }
         
         UserMenuController controller = loader.getController();

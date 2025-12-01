@@ -16,4 +16,5 @@ public interface FriendshipDAO {
     void deleteFriendship(int id);
     java.util.List<User> getFriends(int userId);
     List<Map<String, Object>> getFriendsCollections(int userId);
+    List<String> getFriendsName(int userId);
 }

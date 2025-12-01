@@ -48,7 +48,7 @@ public class UserMenuController implements Initializable {
     @FXML
     private TableColumn<Map, String> collectionCol;
 
-    private FriendshipDAOImpl friendDAO;
+    private FriendshipDAOImpl friendDAO = new FriendshipDAOImpl();
     
     private ObservableList<Map<String, Object>> collectionList = FXCollections.observableArrayList();
     
@@ -88,7 +88,24 @@ public class UserMenuController implements Initializable {
     public void switchToCollectionsMenu(ActionEvent event){
        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("collectionsMenu.FXML"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("collectionsMenu.fxml"));
+        try{ root = loader.load();}
+        catch (IOException ioe){
+            System.err.println(ioe.getMessage());
+        }
+        stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOpacity(1);
+        stage.setScene(new Scene(root));
+        stage.show();
+        
+        parentStage.close();
+    }
+    
+    public void switchToFriendsMenu(ActionEvent event){
+       Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FriendsMenu.fxml"));
         try{ root = loader.load();}
         catch (IOException ioe){
             System.err.println(ioe.getMessage());
