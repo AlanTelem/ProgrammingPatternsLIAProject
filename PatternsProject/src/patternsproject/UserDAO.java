@@ -16,6 +16,7 @@ public interface UserDAO {
     List<User> getAllUsers();
     String getUserByUsername(String username);
     String getPasswordByUsername(String username);
+    String getUsernameById(int id);
     int getIdByUser(String username);
     boolean userExists(String username);
     void registerUser(User user);

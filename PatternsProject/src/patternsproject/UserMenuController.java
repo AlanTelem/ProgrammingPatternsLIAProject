@@ -97,6 +97,7 @@ public class UserMenuController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setOpacity(1);
         stage.setScene(new Scene(root));
+        stage.setTitle("Collections Application");
         stage.show();
         
         parentStage.close();
@@ -114,6 +115,7 @@ public class UserMenuController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setOpacity(1);
         stage.setScene(new Scene(root));
+        stage.setTitle("Collections Application");        
         stage.show();
         
         parentStage.close();
@@ -134,6 +136,7 @@ public class UserMenuController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setOpacity(1);
         stage.setScene(new Scene(root));
+        stage.setTitle("Collections Application");
         stage.show();
         
         parentStage.close();

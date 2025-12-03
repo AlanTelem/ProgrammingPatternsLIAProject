@@ -67,6 +67,24 @@ public class UserDAOImpl implements UserDAO{
         }
         return result;
     }
+
+    @Override
+    public String getUsernameById(int id) {
+        String sql = "SELECT userName FROM users WHERE userId = ?";
+        String result = null;
+        try(Connection conn = DriverManager.getConnection(dbUrl);
+                PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next())
+                result = rs.getString("userName");
+        } catch (SQLException sqle){
+            System.err.println(sqle.getMessage());
+        }
+        return result;
+    }
+    
+    
     
     @Override
     public String getPasswordByUsername(String username) {

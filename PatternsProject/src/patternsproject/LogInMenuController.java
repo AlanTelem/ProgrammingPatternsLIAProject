@@ -52,6 +52,8 @@ public class LogInMenuController implements Initializable {
     private Parent root;
     
     private UserDAOImpl userDAO = new UserDAOImpl();
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -101,7 +103,7 @@ public class LogInMenuController implements Initializable {
     }
     
     public void createUser(ActionEvent event){
-        if (usernameTxtField.getText().equalsIgnoreCase("Guest")){
+        if (usernameTxtField.getText().contains("Guest")){
             Alert guestAlert = new Alert(Alert.AlertType.ERROR);
             guestAlert.setTitle("Creation Conflict");
             guestAlert.setHeaderText("Invalid Username");
@@ -125,7 +127,7 @@ public class LogInMenuController implements Initializable {
     }
     
     public void switchToGuestUserMenu(ActionEvent event){
-        UserSession.setInstance(userDAO.getIdByUser(usernameTxtField.getText()));
+        UserSession.setInstance(userDAO.getIdByUser("Guest"));
         
         Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
