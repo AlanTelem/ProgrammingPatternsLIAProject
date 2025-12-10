@@ -22,12 +22,13 @@ public class FriendshipDAOImpl implements FriendshipDAO{
     private String dbUrl = "jdbc:sqlite:collections.db";
     @Override
     public void createFriendship(Friendship friendship) {
-        String sql = "INSERT INTO friendships VALUES(?,?,?)";
+        String sql = "INSERT INTO Friendships (userId, friendId) VALUES(?, ?)";
         try(Connection conn = DriverManager.getConnection(dbUrl);
                 PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setInt(1, friendship.getFriendshipId());
-            pstmt.setInt(2, friendship.getUserId());
-            pstmt.setInt(3, friendship.getFriendId());
+            pstmt.setInt(1, friendship.getUserId());
+            pstmt.setInt(2, friendship.getFriendId());
+            
+            pstmt.executeUpdate();
         } catch (SQLException sqle){
             System.err.println(sqle.getMessage());
         }

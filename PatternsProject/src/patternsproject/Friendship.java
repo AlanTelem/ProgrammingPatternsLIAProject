@@ -9,7 +9,15 @@ package patternsproject;
  * @author highv
  */
 public class Friendship {
+    
+    private static int friendshipIdCounter = 1;
     private int friendshipId, userId, friendId; 
+    
+    public Friendship(int userId, int friendId) {
+        friendshipId = friendshipIdCounter++;
+        this.userId = userId;
+        this.friendId = friendId;
+    }
 
     public Friendship(int friendshipId, int userId, int friendId) {
         this.friendshipId = friendshipId;

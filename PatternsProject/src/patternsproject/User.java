@@ -9,16 +9,16 @@ package patternsproject;
  * @author highv
  */
 public class User {
-    private static int userIdCounter=1;
+    private static int userIdCounter = 1;
     
     private final int userId;
     private final String userName;
     private final String encryptedPassword;
 
     public User(String userName, String password) {
-        userId=userIdCounter++;
+        userId = userIdCounter++;
         this.userName = userName;
-        encryptedPassword=password+"encrypted";
+        encryptedPassword = password + "encrypted";
     }
 
     public User(int userId, String userName, String encryptedPassword) {

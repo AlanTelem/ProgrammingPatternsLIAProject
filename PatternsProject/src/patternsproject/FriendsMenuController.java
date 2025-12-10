@@ -87,6 +87,20 @@ public class FriendsMenuController implements Initializable {
     }
     
     public void addFriend(ActionEvent event){
-        //Make new scene
-    }
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddFriends.FXML"));
+        try{ root = loader.load();}
+        catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        
+        stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOpacity(1);
+        stage.setScene(new Scene(root));
+        stage.setTitle("Collection Application");
+        stage.show();
+        
+        parentStage.close();    }
 }
