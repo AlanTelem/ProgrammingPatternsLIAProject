@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="144.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.AddFriendsController">
+<AnchorPane id="AnchorPane" prefHeight="144.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.Controllers.AddFriendsController">
    <children>
       <Label fx:id="addFriendLbl" layoutX="14.0" layoutY="23.0" text="Insert the name of the user you would like to friend:">
          <font>

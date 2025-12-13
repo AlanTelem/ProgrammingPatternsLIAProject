@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="381.0" prefWidth="331.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.FriendsMenuController">
+<AnchorPane id="AnchorPane" prefHeight="381.0" prefWidth="331.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.Controllers.FriendsMenuController">
    <children>
       <Label fx:id="friendLbl" layoutX="14.0" layoutY="14.0" text="Friends List:">
          <font>
