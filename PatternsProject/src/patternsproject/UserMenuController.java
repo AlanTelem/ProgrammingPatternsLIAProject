@@ -60,10 +60,22 @@ public class UserMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        var i18n = I18nManager.get();
+
+        welcomeLbl.textProperty().bind(i18n.bind("userMenu.title"));
+        friendsBtn.textProperty().bind(i18n.bind("userMenu.friendsList"));
+        collectionsBtn.textProperty().bind(i18n.bind("userMenu.collections"));
+        logOutBtn.textProperty().bind(i18n.bind("userMenu.logout"));
+
+        friendCol.textProperty().bind(i18n.bind("userMenu.table.friend"));
+        collectionCol.textProperty().bind(i18n.bind("userMenu.table.collection"));
+
         friendCol.setCellValueFactory(new MapValueFactory<>("userKey"));
         collectionCol.setCellValueFactory(new MapValueFactory<>("collectionKey"));
         
         loadTableData();
+        FxAutoSize.install(welcomeLbl);
     }
     
     private void loadTableData(){
@@ -74,14 +86,6 @@ public class UserMenuController implements Initializable {
         collectionList.addAll(data);
         
         quickViewTableView.setItems(collectionList);
-    }
-    
-    public void switchWelcomeText(String text){
-        String defaultText = welcomeLbl.getText();
-        
-        String newText = defaultText + " " + text;
-        
-        welcomeLbl.setText(newText);
     }
     
     @FXML

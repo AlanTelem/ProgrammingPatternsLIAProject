@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface FriendshipDAO {
     void createFriendship(Friendship friend);
-    void deleteFriendship(int id);
+    void deleteFriendship(int id, int idDos);
     java.util.List<User> getFriends(int userId);
     List<Map<String, Object>> getFriendsCollections(int userId);
     List<String> getFriendsName(int userId);

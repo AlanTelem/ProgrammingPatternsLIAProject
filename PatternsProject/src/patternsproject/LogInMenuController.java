@@ -6,6 +6,7 @@ package patternsproject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,9 +18,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -31,7 +34,7 @@ import javafx.stage.Stage;
 public class LogInMenuController implements Initializable {
 
     @FXML
-    private AnchorPane logInForm;
+    private VBox logInForm;
     @FXML
     private Label usernameLbl;
     @FXML
@@ -46,6 +49,12 @@ public class LogInMenuController implements Initializable {
     private Button createUserBtn;
     @FXML
     private Button logInBtn;
+    @FXML
+    private MenuButton languageMenuBtn;;
+    @FXML 
+    private MenuItem englishItem;
+    @FXML 
+    private MenuItem frenchItem;
 
     private Stage stage;
     private Scene scene;
@@ -59,8 +68,30 @@ public class LogInMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        var i18n = I18nManager.get();
+        
+        usernameLbl.textProperty().bind(i18n.bind("login.username.label"));
+        passwordLbl.textProperty().bind(i18n.bind("login.password.label"));
+        usernameTxtField.promptTextProperty().bind(i18n.bind("login.username.prompt"));
+        passwordField.promptTextProperty().bind(i18n.bind("login.password.prompt"));
+
+        logInBtn.textProperty().bind(i18n.bind("login.button"));
+        guestLogInBtn.textProperty().bind(i18n.bind("login.guest"));
+        createUserBtn.textProperty().bind(i18n.bind("login.createUser"));
+
+        languageMenuBtn.textProperty().bind(i18n.bind("menu.language"));
+        englishItem.textProperty().bind(i18n.bind("lang.english"));
+        frenchItem.textProperty().bind(i18n.bind("lang.french"));
+        
+        FxAutoSize.install(usernameLbl);
     }    
+    
+    @FXML 
+    private void setEnglish() { I18nManager.get().setLocale(Locale.ENGLISH); }
+    
+    @FXML 
+    private void setFrench()  { I18nManager.get().setLocale(Locale.FRENCH); }
+
     
     public void authenticate(ActionEvent event){
         String password = passwordField.getText() + "encrypted";
@@ -89,7 +120,6 @@ public class LogInMenuController implements Initializable {
             stage.setOpacity(1);
             stage.setScene(new Scene(root));
             stage.setTitle("Collections Application");
-            controller.switchWelcomeText(usernameTxtField.getText());
             stage.show();
 
             parentStage.close();
@@ -143,8 +173,7 @@ public class LogInMenuController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setOpacity(1);
         stage.setScene(new Scene(root));
-        stage.setTitle("Collections Application");
-        controller.switchWelcomeText("Guest");
+        stage.setTitle("Collections Application: Guest");
         stage.show();
         
         parentStage.close();

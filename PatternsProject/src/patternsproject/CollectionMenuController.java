@@ -6,21 +6,38 @@ package patternsproject;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
-/**
- * FXML Controller class
- *
- * @author 6119391
- */
-public class CollectionMenuController implements Initializable {
+public class CollectionMenuController implements Initializable{
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private Button addItemBtn;
+
+    @FXML
+    private ListView<?> collectionListView;
+
+    @FXML
+    private Button exitBtn;
+
+    @FXML
+    private Label titleLabel;
+    
+    String collectionName;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        var i18n = I18nManager.get();
+
+        addItemBtn.textProperty().bind(i18n.bind("collectionMenu.addItem"));
+        exitBtn.textProperty().bind(i18n.bind("common.exit"));
+        titleLabel.textProperty().bind(i18n.bind("collectionMenu.title"));
+        titleLabel.textProperty().bind(I18nManager.get().bind("collectionMenu.titleFormat", collectionName));
+        
+        FxAutoSize.install(titleLabel);
     }    
-    
 }
+

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -22,12 +23,13 @@ public class FriendshipDAOImpl implements FriendshipDAO{
     private String dbUrl = "jdbc:sqlite:collections.db";
     @Override
     public void createFriendship(Friendship friendship) {
-        String sql = "INSERT INTO Friendships (userId, friendId) VALUES(?, ?)";
+        String sql = "INSERT INTO Friendships (userId, friendId) VALUES(?, ?), (?, ?);";
         try(Connection conn = DriverManager.getConnection(dbUrl);
                 PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1, friendship.getUserId());
             pstmt.setInt(2, friendship.getFriendId());
-            
+            pstmt.setInt(3, friendship.getFriendId());
+            pstmt.setInt(4, friendship.getUserId());
             pstmt.executeUpdate();
         } catch (SQLException sqle){
             System.err.println(sqle.getMessage());
@@ -35,11 +37,18 @@ public class FriendshipDAOImpl implements FriendshipDAO{
     }
 
     @Override
-    public void deleteFriendship(int id) {
-        String sql = "DELETE FROM friendships WHERE id=?";
+    public void deleteFriendship(int id, int idDos) {
+        String sql = """
+            DELETE FROM Friendships
+            WHERE (userId = ? AND friendId = ?)
+               OR (userId = ? AND friendId = ?)
+            """;
         try (Connection conn = DriverManager.getConnection(dbUrl);
                 PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1, id);
+            pstmt.setInt(2, idDos);
+            pstmt.setInt(3, idDos);
+            pstmt.setInt(4, id);
             pstmt.executeUpdate();
         } catch (SQLException sqle){
             System.err.println(sqle.getMessage());

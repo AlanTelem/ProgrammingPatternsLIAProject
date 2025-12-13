@@ -17,9 +17,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
@@ -52,7 +56,14 @@ public class FriendsMenuController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        var i18n = I18nManager.get();
+    
         int currentUserId = UserSession.getInstance().getUserId();
+        
+        friendLbl.textProperty().bind(i18n.bind("friendsMenu.title"));
+        addFriendsBtn.textProperty().bind(i18n.bind("friendsMenu.addFriends"));
+        exitFriendBtn.textProperty().bind(i18n.bind("common.exit"));
         
         List<String> databaseFriends = friendsDAO.getFriendsName(currentUserId);
         
@@ -61,6 +72,39 @@ public class FriendsMenuController implements Initializable {
         friendsList.addAll(databaseFriends);
         
         friendListView.setItems(friendsList);
+        
+        friendListView.setCellFactory(lv -> {
+            ListCell<String> cell = new ListCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty || item == null ? null : item);
+                }
+            };
+
+            MenuItem removeItem = new MenuItem("Remove friend");
+            removeItem.setOnAction(e -> {
+                String friend = cell.getItem();
+                if (friend == null) return;
+
+                try {
+                    friendsDAO.deleteFriendship(currentUserId, userDAO.getIdByUser(friend));
+                    friendsList.remove(friend);
+                } catch (Exception ex) {
+                    new Alert(Alert.AlertType.ERROR, "Failed to remove friend:\n" + ex.getMessage())
+                            .showAndWait();
+                }
+            });
+
+            ContextMenu menu = new ContextMenu(removeItem);
+
+            cell.emptyProperty().addListener((obs, wasEmpty, isEmpty) ->
+                    cell.setContextMenu(isEmpty ? null : menu));
+
+            return cell;
+        });
+        
+        FxAutoSize.install(friendLbl);
     }
     
     public void exit(ActionEvent event){
@@ -71,10 +115,6 @@ public class FriendsMenuController implements Initializable {
         catch (IOException ioe){
             System.err.println(ioe.getMessage());
         }
-        
-        UserMenuController controller = loader.getController();
-        
-        controller.switchWelcomeText(userDAO.getUsernameById((UserSession.getInstance().getUserId())));
         
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
