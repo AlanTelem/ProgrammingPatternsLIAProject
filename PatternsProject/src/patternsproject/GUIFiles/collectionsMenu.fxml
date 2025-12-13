@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="411.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.CollectionsMenuController">
+<AnchorPane id="AnchorPane" prefHeight="411.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.GUIFiles.CollectionsMenuController">
    <children>
       <Label fx:id="listLbl" layoutX="14.0" layoutY="14.0" text="List of your collections:">
          <font>
