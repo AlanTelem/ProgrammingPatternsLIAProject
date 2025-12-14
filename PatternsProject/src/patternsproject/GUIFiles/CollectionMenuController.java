@@ -7,7 +7,6 @@ package patternsproject.GUIFiles;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,22 +60,4 @@ public class CollectionMenuController implements Initializable{
         collectionListView.setItems(listOfCollections);
     }
     
-    public void exit(ActionEvent event){
-        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.FXML"));
-        try{ root = loader.load();}
-        catch (IOException ioe){
-            System.err.println(ioe.getMessage());
-        }
-        
-        stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setOpacity(1);
-        stage.setScene(new Scene(root));
-        stage.setTitle("Collection Application");
-        stage.show();
-        
-        parentStage.close();
-    }
 }

@@ -8,23 +8,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox spacing="12.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="patternsproject.GUIFiles.CollectionsMenuController">
+<VBox spacing="12.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.GUIFiles.CollectionsMenuController">
     <padding>
-        <Insets top="16" right="16" bottom="16" left="16"/>
+        <Insets bottom="16" left="16" right="16" top="16" />
     </padding>
 
     <Label fx:id="listLbl" text="List of your collections:">
-        <font><Font size="24.0"/></font>
+        <font><Font size="24.0" /></font>
     </Label>
 
-    <ListView fx:id="allCollectionsListView" VBox.vgrow="ALWAYS"/>
+    <ListView fx:id="allCollectionsListView" VBox.vgrow="ALWAYS" />
 
     <HBox spacing="10">
         <children>
-            <Button fx:id="addNewBtn" mnemonicParsing="false" text="Add new collection"/>
-            <Button fx:id="deleteBtn" mnemonicParsing="false" text="Delete collection"/>
-            <Button fx:id="exitBtn" mnemonicParsing="false" text="Exit"/>
+            <Button fx:id="addNewBtn" mnemonicParsing="false" text="Add new collection" />
+            <Button fx:id="deleteBtn" mnemonicParsing="false" text="Delete collection" />
+            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" text="Exit" />
         </children>
     </HBox>
 </VBox>

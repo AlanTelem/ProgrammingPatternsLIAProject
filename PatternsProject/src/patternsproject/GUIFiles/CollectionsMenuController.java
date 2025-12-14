@@ -4,6 +4,7 @@
  */
 package patternsproject.GUIFiles;
 
+import java.io.IOException;
 import patternsproject.Implementations.CollectionDAOImpl;
 import patternsproject.Models.OurCollection;
 import java.net.URL;
@@ -11,11 +12,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import patternsproject.I18nManager;
 import patternsproject.FxAutoSize;
 
@@ -41,6 +49,9 @@ public class CollectionsMenuController implements Initializable {
     private CollectionDAOImpl collectionSql = new CollectionDAOImpl();
     
     private ObservableList<String> data = FXCollections.observableArrayList();
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     /**
      * Initializes the controller class.
@@ -62,6 +73,28 @@ public class CollectionsMenuController implements Initializable {
         allCollectionsListView.setItems(data);
         
         FxAutoSize.install(listLbl);
-    }    
+    }
     
+    public void exit(ActionEvent event){
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/patternsproject/GUIFiles/UserMenu.FXML"));
+        try{ root = loader.load();}
+        catch (IOException ioe){
+            System.err.println(ioe.getMessage());
+        }
+        
+        stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOpacity(1);
+        stage.setScene(new Scene(root));
+        stage.setTitle("Collection Application");
+        stage.show();
+        
+        parentStage.close();
+    }
+    
+    public void deleteCollection(ActionEvent event){
+        String collectionName = allCollectionsListView.selectionModelProperty().get().getSelectedItem();
+    }
 }
