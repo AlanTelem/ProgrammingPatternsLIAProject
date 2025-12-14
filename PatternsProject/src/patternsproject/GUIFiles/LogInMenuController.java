@@ -28,6 +28,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import patternsproject.UserSession;
+import patternsproject.I18nManager;
+import patternsproject.FxAutoSize;
 
 
 /**

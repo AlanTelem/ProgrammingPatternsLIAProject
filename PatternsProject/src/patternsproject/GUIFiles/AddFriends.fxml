@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="12.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.AddFriendsController">
+<VBox spacing="12.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.GUIFiles.AddFriendsController">
     <padding>
         <Insets bottom="16" left="16" right="16" top="16" />
     </padding>

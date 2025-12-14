@@ -29,6 +29,8 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import patternsproject.UserSession;
+import patternsproject.I18nManager;
+import patternsproject.FxAutoSize;
 /**
  *
  * @author lukec

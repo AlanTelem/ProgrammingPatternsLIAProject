@@ -25,7 +25,7 @@ public class PatternsProjectForms extends Application{
 
     @Override
     public void start(Stage stage) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Controllers/LogInMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GUIFiles/LogInMenu.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setTitle("Collections Application");
         stage.setScene(scene);

@@ -27,7 +27,8 @@ import javafx.scene.control.cell.MapValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import patternsproject.UserSession;
-
+import patternsproject.I18nManager;
+import patternsproject.FxAutoSize;
 
 /**
  * FXML Controller class

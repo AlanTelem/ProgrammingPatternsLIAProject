@@ -26,6 +26,8 @@ import javafx.stage.Stage;
 import javax.swing.SpringLayout;
 import org.sqlite.SQLiteException;
 import patternsproject.UserSession;
+import patternsproject.I18nManager;
+import patternsproject.FxAutoSize;
 
 public class AddFriendsController implements Initializable {
 
