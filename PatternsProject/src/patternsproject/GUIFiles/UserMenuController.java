@@ -96,7 +96,7 @@ public class UserMenuController implements Initializable {
     public void switchToCollectionsMenu(ActionEvent event){
        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("collectionsMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/patternsproject/GUIFiles/collectionsMenu.fxml"));
         try{ root = loader.load();}
         catch (IOException ioe){
             System.err.println(ioe.getMessage());
@@ -114,7 +114,7 @@ public class UserMenuController implements Initializable {
     public void switchToFriendsMenu(ActionEvent event){
        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FriendsMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/patternsproject/GUIFiles/FriendsMenu.fxml"));
         try{ root = loader.load();}
         catch (IOException ioe){
             System.err.println(ioe.getMessage());
@@ -135,7 +135,7 @@ public class UserMenuController implements Initializable {
         
         Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInMenu.FXML"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/patternsproject/GUIFiles/LogInMenu.FXML"));
         try{ root = loader.load();}
         catch (IOException ioe){
             System.err.println(ioe.getMessage());

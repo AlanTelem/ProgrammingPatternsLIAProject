@@ -113,7 +113,7 @@ public class LogInMenuController implements Initializable {
             
             Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/patternsproject/UserMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/patternsproject/GUIFiles/UserMenu.fxml"));
             try{ root = loader.load();}
             catch (IOException ioe){
                 ioe.printStackTrace();
