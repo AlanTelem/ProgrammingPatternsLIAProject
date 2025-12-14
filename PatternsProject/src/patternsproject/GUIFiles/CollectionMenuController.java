@@ -57,9 +57,6 @@ public class CollectionMenuController implements Initializable{
         titleLabel.textProperty().bind(I18nManager.get().bind("collectionMenu.titleFormat", collectionName));
         
         FxAutoSize.install(titleLabel);
-    }
-
-    private void loadCollections(ActionEvent event){
         ObservableList<OurCollection> listOfCollections = FXCollections.observableList(collections.getAllCollections());
         collectionListView.setItems(listOfCollections);
     }
