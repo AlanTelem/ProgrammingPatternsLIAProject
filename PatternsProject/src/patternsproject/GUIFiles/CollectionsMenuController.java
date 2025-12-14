@@ -44,12 +44,21 @@ public class CollectionsMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        var i18n = I18nManager.get();
+
+        listLbl.textProperty().bind(i18n.bind("collectionsMenu.title"));
+        addNewBtn.textProperty().bind(i18n.bind("collectionsMenu.addNew"));
+        deleteBtn.textProperty().bind(i18n.bind("collectionsMenu.delete"));
+        exitBtn.textProperty().bind(i18n.bind("common.exit"));
+
         List<OurCollection> list = collectionSql.getAllCollections();
         for (OurCollection ourCollection : list) {
             String stringRep = ourCollection.getName();
             data.add(stringRep);
         }
         allCollectionsListView.setItems(data);
+        
+        FxAutoSize.install(listLbl);
     }    
     
 }

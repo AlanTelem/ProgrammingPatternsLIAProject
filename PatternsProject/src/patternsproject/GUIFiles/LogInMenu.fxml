@@ -1,28 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="logInForm" prefHeight="179.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.GUIFiles.LogInMenuController">
-   <children>
-      <Label fx:id="usernameLbl" layoutX="14.0" layoutY="14.0" prefHeight="39.0" prefWidth="88.0" text="Username:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="passwordLbl" layoutX="14.0" layoutY="71.0" prefHeight="39.0" prefWidth="88.0" text="Password:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="usernameTxtField" layoutX="133.0" layoutY="21.0" prefHeight="25.0" prefWidth="170.0" promptText="Username" />
-      <PasswordField fx:id="passwordField" layoutX="133.0" layoutY="78.0" prefHeight="25.0" prefWidth="170.0" promptText="Password" />
-      <Button fx:id="guestLogInBtn" layoutX="7.0" layoutY="140.0" mnemonicParsing="false" onAction="#switchToGuestUserMenu" prefHeight="25.0" prefWidth="88.0" text="Guest Log In" />
-      <Button fx:id="createUserBtn" layoutX="102.0" layoutY="140.0" mnemonicParsing="false" onAction="#createUser" text="Create User" />
-      <Button fx:id="logInBtn" layoutX="253.0" layoutY="140.0" mnemonicParsing="false" onAction="#authenticate" text="Log In" />
-   </children>
-</AnchorPane>
+<VBox fx:id="logInForm" spacing="12.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patternsproject.LogInMenuController">
+    <padding>
+        <Insets bottom="16" left="16" right="16" top="16" />
+    </padding>
+
+    <HBox>
+        <children>
+            <MenuButton fx:id="languageMenuBtn" mnemonicParsing="false">
+                <items>
+                    <MenuItem fx:id="englishItem" onAction="#setEnglish" />
+                    <MenuItem fx:id="frenchItem" onAction="#setFrench" />
+                </items>
+            </MenuButton>
+        </children>
+    </HBox>
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints fillWidth="true" hgrow="ALWAYS" />
+        </columnConstraints>
+
+        <children>
+            <Label fx:id="usernameLbl" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="usernameTxtField" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" />
+
+            <Label fx:id="passwordLbl" text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+        </children>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+
+    <HBox spacing="10">
+        <children>
+            <Button fx:id="logInBtn" mnemonicParsing="false" onAction="#authenticate" text="Log In" />
+            <Button fx:id="guestLogInBtn" mnemonicParsing="false" onAction="#switchToGuestUserMenu" text="Guest Log In" />
+            <Button fx:id="createUserBtn" mnemonicParsing="false" onAction="#createUser" text="Create User" />
+        </children>
+    </HBox>
+</VBox>

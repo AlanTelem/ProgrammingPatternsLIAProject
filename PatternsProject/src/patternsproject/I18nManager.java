@@ -4,40 +4,56 @@
  */
 package patternsproject;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 /**
  *
  * @author 2478812
  */
-public class I18nManager {
-    private static I18nManager instance;
-    private static Locale currentLocale;
-    private static ResourceBundle messages;
+public final class I18nManager {
 
-    public I18nManager() {
-        currentLocale = Locale.getDefault();
-        messages = ResourceBundle.getBundle("Messages", currentLocale);
+    private static final I18nManager INSTANCE = new I18nManager();
+
+    private final ObjectProperty<Locale> locale =
+            new SimpleObjectProperty<>(Locale.ENGLISH);
+
+    private I18nManager() {}
+
+    public static I18nManager get() {
+        return INSTANCE;
     }
-    
-    public static synchronized I18nManager getInstance(){
-        if (instance == null){
-            instance = new I18nManager();
+
+    public ObjectProperty<Locale> localeProperty() {
+        return locale;
+    }
+
+    public Locale getLocale() {
+        return locale.get();
+    }
+
+    public void setLocale(Locale newLocale) {
+        if (newLocale != null) {
+            locale.set(newLocale);
         }
-        return instance;
-    }
-    
-    public void setLocale(Locale newLocale){
-        this.currentLocale = newLocale;
-        this.messages = ResourceBundle.getBundle("Messages", newLocale);
     }
 
-    public Locale getCurrentLocale() {
-        return currentLocale;
+    public ResourceBundle getBundle() {
+        return ResourceBundle.getBundle("i18n.Messages", getLocale());
     }
 
-    public String getMessage(String Key) {
-        return messages.getString(Key);
+    public StringBinding bind(String key, Object... args) {
+        return Bindings.createStringBinding(() -> {
+            String pattern = getBundle().getString(key);
+            return (args == null || args.length == 0)
+                    ? pattern
+                    : MessageFormat.format(pattern, args);
+        }, locale);
     }
 }
+    
