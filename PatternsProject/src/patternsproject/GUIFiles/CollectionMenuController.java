@@ -6,6 +6,10 @@ package patternsproject.GUIFiles;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import patternsproject.I18nManager;
 import patternsproject.FxAutoSize;
+import patternsproject.Implementations.CollectionDAOImpl;
+import patternsproject.Models.OurCollection;
 
 public class CollectionMenuController implements Initializable{
 
@@ -20,7 +26,7 @@ public class CollectionMenuController implements Initializable{
     private Button addItemBtn;
 
     @FXML
-    private ListView<?> collectionListView;
+    private ListView<OurCollection> collectionListView;
 
     @FXML
     private Button exitBtn;
@@ -29,6 +35,7 @@ public class CollectionMenuController implements Initializable{
     private Label titleLabel;
     
     String collectionName;
+    private CollectionDAOImpl collections = new CollectionDAOImpl();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -40,6 +47,11 @@ public class CollectionMenuController implements Initializable{
         titleLabel.textProperty().bind(I18nManager.get().bind("collectionMenu.titleFormat", collectionName));
         
         FxAutoSize.install(titleLabel);
-    }    
+    }
+
+    private void loadCollections(ActionEvent event){
+        ObservableList<OurCollection> listOfCollections = FXCollections.observableList(collections.getAllCollections());
+        collectionListView.setItems(listOfCollections);
+    }
 }
 
