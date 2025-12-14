@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lukec/Desktop/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/I18nManager.java</file>
-            <file>file:/C:/Users/lukec/Desktop/ProgrammingPatternsLIAProject/PatternsProject/src/I18n/Messages_fr.properties</file>
-            <file>file:/C:/Users/lukec/Desktop/ProgrammingPatternsLIAProject/PatternsProject/src/I18n/Messages_en.properties</file>
-            <file>file:/C:/Users/lukec/Desktop/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/CollectionsMenuController.java</file>
-            <file>file:/C:/Users/lukec/Desktop/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/LogInMenuController.java</file>
-            <file>file:/C:/Users/lukec/Desktop/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/FriendsMenuController.java</file>
-            <file>file:/C:/Users/lukec/Desktop/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/UserMenuController.java</file>
-            <file>file:/C:/Users/lukec/Desktop/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/CollectionMenuController.java</file>
+            <file>file:/C:/Users/highv/Documents/GitHub/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/PatternsProjectForms.java</file>
+            <file>file:/C:/Users/highv/Documents/GitHub/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/GUIFiles/AddFriendsController.java</file>
+            <file>file:/C:/Users/highv/Documents/GitHub/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/GUIFiles/CollectionMenuController.java</file>
+            <file>file:/C:/Users/highv/Documents/GitHub/ProgrammingPatternsLIAProject/PatternsProject/src/patternsproject/I18nManager.java</file>
         </group>
     </open-files>
 </project-private>
